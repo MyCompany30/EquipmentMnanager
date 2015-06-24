@@ -3,7 +3,7 @@
     <string name="idStop">停止</string>
     <string name="about_msg">超高频Rfid演示 v1.1</string>
     <string name="idStart">开始</string>
-    <string name="app_name">国电超高频</string>
+    <string name="app_name">设备管理系统</string>
     <string name="factory_name">电厂设备信息</string>
     <string-array name="mainOperations">
         <item>识别</item>

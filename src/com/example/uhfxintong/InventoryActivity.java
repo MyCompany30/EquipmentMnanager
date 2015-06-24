@@ -35,6 +35,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -99,6 +101,7 @@ public class InventoryActivity extends Activity {
 	private TextView complateTV = null;
 	private int zhengchangCount = 0;
 	private int quexianCount = 0;
+	private List<Uhf> readedUhfs = new ArrayList<Uhf>();
 	//放入timertask内执行
 	private final Runnable accompainimentRunnable = new Runnable() {
 		@Override
@@ -328,6 +331,9 @@ public class InventoryActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		mTts.stopSpeaking();
+		// 退出时释放连接
+		mTts.destroy();
 		stop();
 	}
 
@@ -406,17 +412,6 @@ public class InventoryActivity extends Activity {
 		this.runOnUiThread(accompainimentRunnable);
 	}
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (KeyEvent.KEYCODE_BACK == keyCode || event.getAction() == KeyEvent.ACTION_DOWN) {
-			mTts.stopSpeaking();
-			// 退出时释放连接
-			mTts.destroy();
-
-			this.finish();
-		}
-		return super.onKeyDown(keyCode, event);
-	}
 
 	private void setParam() {
 		System.out.println("进入设置界面");
@@ -505,20 +500,20 @@ public class InventoryActivity extends Activity {
 	};
 
 	@SuppressWarnings("static-access")
-	public void onConfigurationChanged(Configuration newConfig) {
-
-		super.onConfigurationChanged(newConfig);
-		LinearLayout layout = (LinearLayout)this.findViewById(R.id.read_main_layout);
-		//切换为竖屏
-		if (newConfig.orientation == this.getResources().getConfiguration().ORIENTATION_PORTRAIT) {
-			layout.setBackgroundResource(R.drawable.frame_bg_v);
-
-		}
-		//切换为横屏
-		else if (newConfig.orientation == this.getResources().getConfiguration().ORIENTATION_LANDSCAPE) {
-			layout.setBackgroundResource(R.drawable.frame_bg);
-		}
-	}
+//	public void onConfigurationChanged(Configuration newConfig) {
+//
+//		super.onConfigurationChanged(newConfig);
+//		LinearLayout layout = (LinearLayout)this.findViewById(R.id.read_main_layout);
+//		//切换为竖屏
+//		if (newConfig.orientation == this.getResources().getConfiguration().ORIENTATION_PORTRAIT) {
+//			layout.setBackgroundResource(R.drawable.frame_bg_v);
+//
+//		}
+//		//切换为横屏
+//		else if (newConfig.orientation == this.getResources().getConfiguration().ORIENTATION_LANDSCAPE) {
+//			layout.setBackgroundResource(R.drawable.frame_bg);
+//		}
+//	}
 	class MyListAdapter extends BaseAdapter{
 		@Override
 		public int getCount() {
@@ -663,7 +658,9 @@ public class InventoryActivity extends Activity {
 					dialog.show();
 				}
 			});
-			speaking(uhfArrayList.get(position));
+			if(!readedUhfs.contains(uhfArrayList.get(position))) {
+				speaking(uhfArrayList.get(position));
+			}
 			return convertView;
 		}
 		
@@ -680,8 +677,10 @@ public class InventoryActivity extends Activity {
 	}
 	public void speaking(Uhf uhfById){
 		String edit_UII = null;
+		edit_UII = "";
 		edit_UII += "设备名称  "+uhfById.getUhfName()+"  巡视人员   " + uhfById.getOperator() + "  巡视时间   " + uhfById.getTime();
 		int code = mTts.startSpeaking(edit_UII, mTtsListener);
+		readedUhfs.add(uhfById);
 		stop();
 		if (code != ErrorCode.SUCCESS) {
 			if (code == ErrorCode.ERROR_COMPONENT_NOT_INSTALLED) {
