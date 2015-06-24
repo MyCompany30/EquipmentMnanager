@@ -1,0 +1,213 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/write_main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.example.uhfxintong.MainActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:paddingTop="10dp" >
+
+        <ImageView
+            android:id="@+id/shutup"
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:paddingRight="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/write_close_btn" />
+
+        <ImageView
+            android:id="@+id/cancel"
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@id/shutup"
+            android:scaleType="centerInside"
+            android:src="@drawable/write_clear_btn" />
+
+        <ImageView
+            android:id="@+id/modify"
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@id/cancel"
+            android:scaleType="centerInside"
+            android:src="@drawable/write_edit_btn" />
+
+        <ImageView
+            android:id="@+id/save"
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@id/modify"
+            android:scaleType="centerInside"
+            android:src="@drawable/write_save_btn" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/write_circle_bg"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="电厂设备信息"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/uii_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="ＵＨＦ　ＵＩＩ号："
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" >
+                </TextView>
+
+                <EditText
+                    android:id="@+id/edit_uii"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/write_edit_bg"
+                    android:gravity="center"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="　　　　厂商名称："
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" >
+                </TextView>
+
+                <EditText
+                    android:id="@+id/edit_facory"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/write_edit_bg"
+                    android:gravity="center"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="　　　　设备名称："
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" >
+                </TextView>
+
+                <EditText
+                    android:id="@+id/edit_device"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/write_edit_bg"
+                    android:gravity="center"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="　　　　电压等级："
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" >
+                </TextView>
+
+                <EditText
+                    android:id="@+id/edit_volt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/write_edit_bg"
+                    android:gravity="center"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="　　　　所属间隔："
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" >
+                </TextView>
+
+                <EditText
+                    android:id="@+id/edit_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/write_edit_bg"
+                    android:gravity="center"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

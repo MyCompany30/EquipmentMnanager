@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/frame_bg_v" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="巡检人："
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/operator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="未登录"
+                android:textSize="30sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="编号："
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/operator_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="未登录"
+                android:textSize="20sp" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="402dp"
+            android:layout_height="400dp"
+            android:layout_marginTop="50dp" >
+
+            <ImageView
+                android:id="@+id/read"
+                android:layout_width="201dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:background="@drawable/read_btn"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/write"
+                android:layout_width="201dp"
+                android:layout_height="200dp"
+                android:layout_toRightOf="@+id/read"
+                android:background="@drawable/write_btn"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/person"
+                android:layout_width="201dp"
+                android:layout_height="200dp"
+                android:layout_below="@+id/read"
+                android:background="@drawable/person_btn"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/stocktaking"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_below="@+id/write"
+                android:layout_toRightOf="@+id/person"
+                android:background="@drawable/lishi_btn"
+                android:scaleType="centerInside" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
