@@ -70,7 +70,6 @@ public class PhotoGridViewAdapter extends BaseAdapter {
 				
 				@Override
 				public void onClick(View arg0) {
-					Toast.makeText(context, "position = " + position, 0).show();
 					String path = photoPaths.get(position);
 					File file = new File(photoPaths.get(position));
 					if(file.exists()) {
