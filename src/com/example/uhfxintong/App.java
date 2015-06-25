@@ -53,11 +53,12 @@ public class App extends Application {
 				.showImageOnFail(R.drawable.img).cacheInMemory(true)
 				.considerExifParams(true).cacheOnDisc(true)
 				.displayer(new FadeInBitmapDisplayer(300, true, true, true))
-				.imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
+				.imageScaleType(ImageScaleType.IN_SAMPLE_INT)
 				.bitmapConfig(Bitmap.Config.RGB_565).build();
 		ImageLoaderConfiguration.Builder builder = new ImageLoaderConfiguration.Builder(
 				context).defaultDisplayImageOptions(defaultOptions)
 				.discCache(new UnlimitedDiscCache(cacheDir))
+				.memoryCacheExtraOptions(240, 400)
 				.memoryCache(new WeakMemoryCache());
 		ImageLoaderConfiguration config = builder.build();
 		ImageLoader.getInstance().init(config);
