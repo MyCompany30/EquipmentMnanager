@@ -87,7 +87,7 @@ public class App extends Application {
 				return null;
 			}
 			rfid = rf;
-
+			rfid.setPower(30);
 			InterrogatorModel model = rfid.getInterrogatorModel();
 			saveModelName(model);
 			switch (model) {
