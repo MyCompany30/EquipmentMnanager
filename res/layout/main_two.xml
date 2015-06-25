@@ -59,7 +59,7 @@
                 android:id="@+id/read"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:background="@drawable/read_btn"
                 android:scaleType="centerInside" />
@@ -69,8 +69,8 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:layout_marginBottom="30dp"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
                 android:background="@drawable/write_btn"
                 android:scaleType="centerInside" />
 
@@ -78,8 +78,8 @@
                 android:id="@+id/person"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/person_btn"
                 android:scaleType="centerInside" />
 
