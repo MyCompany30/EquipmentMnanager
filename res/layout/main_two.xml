@@ -68,9 +68,9 @@
                 android:id="@+id/write"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:layout_marginBottom="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/write_btn"
                 android:scaleType="centerInside" />
 
@@ -80,6 +80,7 @@
                 android:layout_height="160dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/person_btn"
                 android:scaleType="centerInside" />
 
@@ -88,21 +89,13 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="30dp"
                 android:layout_alignParentLeft="true"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/lishi_btn"
                 android:scaleType="centerInside" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/person"
-                android:layout_below="@+id/person"
-                android:layout_marginRight="50dp"
-                android:text="登录"
-                android:textSize="25sp" />
-
-            <TextView
+                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignRight="@+id/read"
@@ -114,21 +107,31 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/stocktaking"
                 android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/stocktaking"
                 android:layout_marginRight="50dp"
                 android:text="历史"
                 android:textSize="25sp" />
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/write"
                 android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/write"
                 android:layout_marginRight="50dp"
+                android:text="登录"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView1"
+                android:layout_alignLeft="@+id/textView2"
                 android:text="写入"
                 android:textSize="25sp" />
         </RelativeLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
