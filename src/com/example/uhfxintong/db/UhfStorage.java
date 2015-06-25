@@ -33,6 +33,7 @@ public class UhfStorage {
 	    static final String COLUM_LINE="linespace";
 	    static final String COLUM_DEFECT = "defect";
 	    static final String COLUM_NOTES = "notes";
+	    static final String COLUM_PHOTO = "photos";
 	    //创建数据表语句
 	    private String mCreateTableSql="create table if not exists "+
 	    TABLE_NAME+"("+COLUM_ID+" text primary key not null,"
@@ -43,7 +44,7 @@ public class UhfStorage {
 			+ TABLE_NAME2 + "(" + COLUM_ID + " text not null,"
 			+ COLUM_NAME + " text," + COLUM_TIME + " text," + COLUM_OPERATOR
 			+ " text," + COLUM_VOLT + " text," + COLUM_LINE + " text,"
-			+ COLUM_FACTORY + " text,"+ COLUM_DEFECT + " text,"+ COLUM_NOTES + " text" + ")";
+			+ COLUM_FACTORY + " text,"+ COLUM_DEFECT + " text,"+ COLUM_NOTES + " text," +  COLUM_PHOTO + " text "+ ")";
 	   //创建数据库和数据表
 	    public UhfStorage(Context context){
 	    	
@@ -103,7 +104,7 @@ public class UhfStorage {
 	    	
 	    }
 	    public String[] getHistoryColumns(){
-			return new String[]{COLUM_ID,COLUM_NAME,COLUM_TIME, COLUM_FACTORY,COLUM_OPERATOR,COLUM_VOLT,COLUM_LINE,COLUM_DEFECT,COLUM_NOTES};
+			return new String[]{COLUM_ID,COLUM_NAME,COLUM_TIME, COLUM_FACTORY,COLUM_OPERATOR,COLUM_VOLT,COLUM_LINE,COLUM_DEFECT,COLUM_NOTES, COLUM_PHOTO};
 	    	
 	    }
 	    /**获取所有射频信息
@@ -164,6 +165,7 @@ public class UhfStorage {
 			uhf.setLineSpace(cursor.getString(cursor.getColumnIndex(COLUM_LINE)));
 			uhf.setDefect(cursor.getString(cursor.getColumnIndex(COLUM_DEFECT)));
 			uhf.setNotes(cursor.getString(cursor.getColumnIndex(COLUM_NOTES)));
+			uhf.setPhotos(cursor.getString(cursor.getColumnIndex(COLUM_PHOTO)));
 			return uhf;
 		}
 		public void clear(){

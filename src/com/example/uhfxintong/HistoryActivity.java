@@ -9,6 +9,7 @@ import com.example.uhfxintong.db.UhfService;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,9 @@ public class HistoryActivity extends Activity {
 		listAdapter = new HistoryListAdapter();
 		UhfService uhfService = new UhfService(this);
 		arrayList = uhfService.getAllHistoryUhf();
+		for(Uhf uhf : arrayList) {
+			Log.i("a", "uhf = " + uhf.toString());
+		}
 		listView.setAdapter(listAdapter);
 	}
 	

@@ -43,6 +43,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,10 @@ import android.widget.Toast;
 
 import com.example.uhfxintong.db.Uhf;
 import com.example.uhfxintong.db.UhfService;
+import com.example.uhfxintong.eventbus.DefectListener;
+import com.example.uhfxintong.eventbus.NoteListener;
+
+import de.greenrobot.event.EventBus;
 
 @SuppressLint("SimpleDateFormat")
 public class InventoryActivity extends Activity {
@@ -212,6 +217,7 @@ public class InventoryActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Intent i = getIntent();
+		EventBus.getDefault().register(this);
 		if(i.hasExtra("operator")&&i.getExtras().containsKey("operator")){
 			operator = i.getExtras().getString("operator");
 		}
@@ -542,10 +548,18 @@ public class InventoryActivity extends Activity {
 			TextView personTV = (TextView)convertView.findViewById(R.id.pandian_listitem_xunshirenyuan2);
 			TextView dateTimeTV = (TextView)convertView.findViewById(R.id.pandian_listitem_xunshishijian2);
 			final ImageView quexianImg = (ImageView)convertView.findViewById(R.id.quexian_imgview);
-			if(uhfArrayList.get(position).getDefect()!=null&&!uhfArrayList.get(position).getDefect().equals("")){
+//			if(uhfArrayList.get(position).getDefect()!=null&&!uhfArrayList.get(position).getDefect().equals("")){
+//				quexianImg.setImageResource(R.drawable.pandian_quexian_p);
+//				quexianImg.setTag(R.drawable.pandian_quexian_p);
+//			}else{
+//				quexianImg.setImageResource(R.drawable.quexian_btn);
+//				quexianImg.setTag(R.drawable.quexian_btn);
+//			}
+			Uhf uhf = uhfArrayList.get(position);
+			if(!"".equals(uhf.getDefect()) || !"".equals(uhf.getPhotos())) {
 				quexianImg.setImageResource(R.drawable.pandian_quexian_p);
 				quexianImg.setTag(R.drawable.pandian_quexian_p);
-			}else{
+			}else {
 				quexianImg.setImageResource(R.drawable.quexian_btn);
 				quexianImg.setTag(R.drawable.quexian_btn);
 			}
@@ -562,58 +576,64 @@ public class InventoryActivity extends Activity {
 			quexianImg.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					Intent intent = new Intent(InventoryActivity.this, QueXianInputActivity.class);
+					final Uhf uhf = uhfArrayList.get(position);
+					Log.i("a", "uhf = " + uhf.toString());
+					intent.putExtra("uhf", uhf);
+					intent.putExtra("position", position);
+					startActivity(intent);
 					// TODO Auto-generated method stub
-					final Dialog dialog = new Dialog(InventoryActivity.this, R.style.operatordialog);
-					dialog.setContentView(R.layout.pandian_dialog);
-					TextView submitBtn = (TextView)dialog.findViewById(R.id.queding);
-					TextView cancelBtn = (TextView)dialog.findViewById(R.id.quxiao);
-					TextView equipmentTV = (TextView)dialog.findViewById(R.id.pandian_listitem_shebeimingcheng2);
-					TextView personTV = (TextView)dialog.findViewById(R.id.pandian_listitem_xunshirenyuan2);
-					TextView dateTimeTV = (TextView)dialog.findViewById(R.id.pandian_listitem_xunshishijian2);
-					final EditText edt = (EditText)dialog.findViewById(R.id.edit_text);
-					edt.setHint("缺陷：请点击输入...");
-					edt.setText(uhfArrayList.get(position).getDefect());
-					equipmentTV.setText(uhfArrayList.get(position).getUhfName());
-					personTV.setText(uhfArrayList.get(position).getOperator());
-					dateTimeTV.setText(uhfArrayList.get(position).getTime());
-					submitBtn.setOnClickListener(new OnClickListener() {
-						
-						/* (non-Javadoc)
-						 * @see android.view.View.OnClickListener#onClick(android.view.View)
-						 */
-						@Override
-						public void onClick(View v) {
-							//添加、更新缺陷数据
-							uhfArrayList.get(position).setDefect(edt.getText().toString());
-							if(edt.getText().toString().trim().equals("")){
-								if(!quexianImg.getTag().equals(R.drawable.quexian_btn)){
-									quexianCount--;
-									zhengchangTV.setText((uhfArrayList.size()-quexianCount)+"");
-									quexianTV.setText(quexianCount+"");
-									quexianImg.setImageResource(R.drawable.quexian_btn);
-									quexianImg.setTag(R.drawable.quexian_btn);
-								}
-							}else{
-								if(!quexianImg.getTag().equals(R.drawable.pandian_quexian_p)){
-									
-									quexianCount++;
-									zhengchangTV.setText((uhfArrayList.size()-quexianCount)+"");
-									quexianTV.setText(quexianCount+"");
-									quexianImg.setImageResource(R.drawable.pandian_quexian_p);
-									quexianImg.setTag(R.drawable.pandian_quexian_p);
-								}
-							}
-							dialog.dismiss();
-						}
-					});
-					cancelBtn.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							dialog.dismiss();
-						}
-					});
-					dialog.show();
+//					final Dialog dialog = new Dialog(InventoryActivity.this, R.style.operatordialog);
+//					dialog.setContentView(R.layout.pandian_dialog);
+//					TextView submitBtn = (TextView)dialog.findViewById(R.id.queding);
+//					TextView cancelBtn = (TextView)dialog.findViewById(R.id.quxiao);
+//					TextView equipmentTV = (TextView)dialog.findViewById(R.id.pandian_listitem_shebeimingcheng2);
+//					TextView personTV = (TextView)dialog.findViewById(R.id.pandian_listitem_xunshirenyuan2);
+//					TextView dateTimeTV = (TextView)dialog.findViewById(R.id.pandian_listitem_xunshishijian2);
+//					final EditText edt = (EditText)dialog.findViewById(R.id.edit_text);
+//					edt.setHint("缺陷：请点击输入...");
+//					edt.setText(uhfArrayList.get(position).getDefect());
+//					equipmentTV.setText(uhfArrayList.get(position).getUhfName());
+//					personTV.setText(uhfArrayList.get(position).getOperator());
+//					dateTimeTV.setText(uhfArrayList.get(position).getTime());
+//					submitBtn.setOnClickListener(new OnClickListener() {
+//						
+//						/* (non-Javadoc)
+//						 * @see android.view.View.OnClickListener#onClick(android.view.View)
+//						 */
+//						@Override
+//						public void onClick(View v) {
+//							//添加、更新缺陷数据
+//							uhfArrayList.get(position).setDefect(edt.getText().toString());
+//							if(edt.getText().toString().trim().equals("")){
+//								if(!quexianImg.getTag().equals(R.drawable.quexian_btn)){
+//									quexianCount--;
+//									zhengchangTV.setText((uhfArrayList.size()-quexianCount)+"");
+//									quexianTV.setText(quexianCount+"");
+//									quexianImg.setImageResource(R.drawable.quexian_btn);
+//									quexianImg.setTag(R.drawable.quexian_btn);
+//								}
+//							}else{
+//								if(!quexianImg.getTag().equals(R.drawable.pandian_quexian_p)){
+//									
+//									quexianCount++;
+//									zhengchangTV.setText((uhfArrayList.size()-quexianCount)+"");
+//									quexianTV.setText(quexianCount+"");
+//									quexianImg.setImageResource(R.drawable.pandian_quexian_p);
+//									quexianImg.setTag(R.drawable.pandian_quexian_p);
+//								}
+//							}
+//							dialog.dismiss();
+//						}
+//					});
+//					cancelBtn.setOnClickListener(new OnClickListener() {
+//						
+//						@Override
+//						public void onClick(View v) {
+//							dialog.dismiss();
+//						}
+//					});
+//					dialog.show();
 				}
 			});
 			//备注按钮
@@ -621,41 +641,47 @@ public class InventoryActivity extends Activity {
 				
 				@Override
 				public void onClick(View v) {
+					Intent intent = new Intent(InventoryActivity.this, BeiZhuInputActivity.class);
+					final Uhf uhf = uhfArrayList.get(position);
+					Log.i("a", "uhf = " + uhf.toString());
+					intent.putExtra("uhf", uhf);
+					intent.putExtra("position", position);
+					startActivity(intent);
 					// TODO Auto-generated method stub
-					final Dialog dialog = new Dialog(InventoryActivity.this, R.style.operatordialog);
-					dialog.setContentView(R.layout.pandian_dialog);
-					TextView submitBtn = (TextView)dialog.findViewById(R.id.queding);
-					TextView cancelBtn = (TextView)dialog.findViewById(R.id.quxiao);
-					TextView equipmentTV = (TextView)dialog.findViewById(R.id.pandian_listitem_shebeimingcheng2);
-					TextView personTV = (TextView)dialog.findViewById(R.id.pandian_listitem_xunshirenyuan2);
-					TextView dateTimeTV = (TextView)dialog.findViewById(R.id.pandian_listitem_xunshishijian2);
-					final EditText edt = (EditText)dialog.findViewById(R.id.edit_text);
-					edt.setHint("备注：请点击输入...");
-					edt.setText(uhfArrayList.get(position).getNotes());
-					equipmentTV.setText(uhfArrayList.get(position).getUhfName());
-					personTV.setText(uhfArrayList.get(position).getOperator());
-					dateTimeTV.setText(uhfArrayList.get(position).getTime());
-					submitBtn.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							//添加、更新备注数据
-							uhfArrayList.get(position).setNotes(edt.getText().toString().trim());
-							if(edt.getText().toString().trim().equals("")){
-								beizhuImg.setImageResource(R.drawable.beizhu_btn);
-							}else{
-								beizhuImg.setImageResource(R.drawable.pandian_beizhu_p);
-							}
-							dialog.dismiss();
-						}
-					});
-					cancelBtn.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							dialog.dismiss();
-						}
-					});
-					dialog.show();
+//					final Dialog dialog = new Dialog(InventoryActivity.this, R.style.operatordialog);
+//					dialog.setContentView(R.layout.pandian_dialog);
+//					TextView submitBtn = (TextView)dialog.findViewById(R.id.queding);
+//					TextView cancelBtn = (TextView)dialog.findViewById(R.id.quxiao);
+//					TextView equipmentTV = (TextView)dialog.findViewById(R.id.pandian_listitem_shebeimingcheng2);
+//					TextView personTV = (TextView)dialog.findViewById(R.id.pandian_listitem_xunshirenyuan2);
+//					TextView dateTimeTV = (TextView)dialog.findViewById(R.id.pandian_listitem_xunshishijian2);
+//					final EditText edt = (EditText)dialog.findViewById(R.id.edit_text);
+//					edt.setHint("备注：请点击输入...");
+//					edt.setText(uhfArrayList.get(position).getNotes());
+//					equipmentTV.setText(uhfArrayList.get(position).getUhfName());
+//					personTV.setText(uhfArrayList.get(position).getOperator());
+//					dateTimeTV.setText(uhfArrayList.get(position).getTime());
+//					submitBtn.setOnClickListener(new OnClickListener() {
+//						@Override
+//						public void onClick(View v) {
+//							//添加、更新备注数据
+//							uhfArrayList.get(position).setNotes(edt.getText().toString().trim());
+//							if(edt.getText().toString().trim().equals("")){
+//								beizhuImg.setImageResource(R.drawable.beizhu_btn);
+//							}else{
+//								beizhuImg.setImageResource(R.drawable.pandian_beizhu_p);
+//							}
+//							dialog.dismiss();
+//						}
+//					});
+//					cancelBtn.setOnClickListener(new OnClickListener() {
+//						
+//						@Override
+//						public void onClick(View v) {
+//							dialog.dismiss();
+//						}
+//					});
+//					dialog.show();
 				}
 			});
 			if(!readedUhfs.contains(uhfArrayList.get(position))) {
@@ -690,5 +716,18 @@ public class InventoryActivity extends Activity {
 
 			} 
 		}
+	}
+	
+	public void onEvent(DefectListener event) {
+		Uhf uhf = uhfArrayList.get(event.getPosition());
+		uhf.setDefect(event.getContent());
+		uhf.setPhotos(event.getPhotoPaths());
+		listAdapter.notifyDataSetChanged();
+	}
+	
+	public void onEvent(NoteListener event) {
+		Uhf uhf = uhfArrayList.get(event.getPosition());
+		uhf.setNotes(event.getContent());
+		listAdapter.notifyDataSetChanged();
 	}
 }

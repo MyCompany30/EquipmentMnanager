@@ -88,6 +88,7 @@ public class UhfService {
 		cv.put(storage.COLUM_LINE, uhf.getLineSpace());
 		cv.put(storage.COLUM_DEFECT, uhf.getDefect());
 		cv.put(storage.COLUM_NOTES, uhf.getNotes());
+		cv.put(storage.COLUM_PHOTO, uhf.getPhotos());
 		return cv;
 	}
 	

@@ -1,6 +1,10 @@
 package com.example.uhfxintong.db;
 
-public class Uhf {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Uhf implements Serializable{
 
 	private String uhfId;
 	private String uhfName;//设备名称
@@ -9,8 +13,9 @@ public class Uhf {
 	private String voltGrade;
 	private String lineSpace;
 	private String factory;
-	private String defect;//缺陷
-	private String notes;  //备注
+	private String defect = "";//缺陷
+	private String notes = "";  //备注
+	private String photos = "";  //图片路径，已，分隔
 	public String getDefect() {
 		return defect;
 	}
@@ -105,6 +110,15 @@ public class Uhf {
 	public void setLineSpace(String lineSpace) {
 		this.lineSpace = lineSpace;
 	}
+	
+	public String getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(String photos) {
+		this.photos = photos;
+	}
+
 	public boolean equals(Object obj) {   
         if (obj instanceof Uhf) {   
         	Uhf u = (Uhf) obj;   
@@ -112,4 +126,15 @@ public class Uhf {
         }   
         return super.equals(obj);  
 	}
+
+	@Override
+	public String toString() {
+		return "Uhf [uhfId=" + uhfId + ", uhfName=" + uhfName + ", time="
+				+ time + ", operator=" + operator + ", voltGrade=" + voltGrade
+				+ ", lineSpace=" + lineSpace + ", factory=" + factory
+				+ ", defect=" + defect + ", notes=" + notes + ", photos="
+				+ photos + "]";
+	}
+	
+	
 }
