@@ -28,7 +28,10 @@
         <activity
             android:name="com.example.uhfxintong.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,30 +41,44 @@
         <activity
             android:name="com.example.uhfxintong.EntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/idWriteActivity_title" />
+            android:label="@string/idWriteActivity_title" 
+                        android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
         <activity
             android:name="com.example.uhfxintong.InventoryActivity"
             android:configChanges="screenSize|keyboardHidden|orientation|screenSize|keyboard"
             android:label="@string/idReadActivity_title"
-            android:screenOrientation="sensor" />
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"            
+            />
         <activity
             android:name="com.example.uhfxintong.HistoryActivity"
-            android:label="@string/title_activity_history" >
+            android:label="@string/title_activity_history" 
+                        android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            >
         </activity>
         <activity
             android:name="com.example.uhfxintong.ErWeiScanCaptureActivity"
             android:label="@string/title_activity_history"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"            
+            >
         </activity>
         <activity
             android:name="com.example.uhfxintong.QueXianInputActivity"
             android:label="@string/title_activity_history"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"            
+            >
         </activity>
                 <activity
             android:name="com.example.uhfxintong.BeiZhuInputActivity"
             android:label="@string/title_activity_history"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"            
+            >
         </activity>
         
     </application>
