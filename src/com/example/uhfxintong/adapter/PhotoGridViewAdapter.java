@@ -51,7 +51,7 @@ public class PhotoGridViewAdapter extends BaseAdapter {
 	public View getView(final int position, View contentView, ViewGroup arg2) {
 		ViewHolder vh;
 		if(contentView == null) {
-			contentView = inflater.inflate(R.layout.item_photo_gridview, null);
+			contentView = inflater.inflate(R.layout.item_pic_grid, null);
 			vh = new ViewHolder();
 			vh.photo = (ImageView) contentView.findViewById(R.id.photo);
 			vh.deleteTag = (ImageView) contentView.findViewById(R.id.deleteTag);

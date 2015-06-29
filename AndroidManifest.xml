@@ -80,6 +80,13 @@
             android:theme="@android:style/Theme.Light.NoTitleBar"            
             >
         </activity>
+                        <activity
+            android:name="com.example.uhfxintong.HistoryActivityNew"
+            android:label="@string/title_activity_history"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"            
+            >
+        </activity>
         
     </application>
 

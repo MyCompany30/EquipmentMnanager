@@ -1,117 +1,296 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/frame_bg"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#fff"
+    >
 
     <RelativeLayout
+        android:id="@+id/yxLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:visibility="visible" >
 
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/yxtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:text="2015年12月22日\n13时43分22秒"
-            android:textColor="#fff" />
-
-        <TextView
-            android:id="@+id/num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/time"
-            android:background="@drawable/guzhangxuliebg"
-            android:gravity="center"
-            android:text="1"
-            android:textColor="#fff" />
+            android:text="2015-06-26\n14时25分36秒"
+            android:textColor="#000"
+            android:textSize="20dp" />
 
         <LinearLayout
-            android:id="@+id/detail"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/num"
-            android:background="@drawable/xqbg"
-            android:orientation="vertical" 
-            android:gravity="center"
-            >
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/yxtime"
+            android:background="@drawable/yxjlbg"
+            android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp" >
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="设备名称："
-                    android:textColor="#fff"
+                    android:textColor="#000"
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/sbName"
+                    android:id="@+id/yxsbName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="设备名称："
-                    android:textColor="#fff"
+                    android:textColor="#000"
                     android:textSize="20dp" />
             </LinearLayout>
-                        <LinearLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp" 
-                android:layout_marginTop="20dp"
-                >
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="巡视人："
-                    android:textColor="#fff"
+                    android:text="    巡视人："
+                    android:textColor="#000"
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/xsName"
+                    android:id="@+id/yxxsrName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="设备名称："
-                    android:textColor="#fff"
+                    android:textColor="#000"
                     android:textSize="20dp" />
             </LinearLayout>
-                                    <LinearLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="20dp"
-                 >
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="经纬度："
-                    android:textColor="#fff"
+                    android:text="    经纬度："
+                    android:textColor="#000"
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/jwName"
+                    android:id="@+id/yxjwd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="北纬36度4‘，东经117度40"
-                    android:textColor="#fff"
+                    android:text="北纬36,东经117"
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="        备注："
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/yxbz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="北纬36,东经117"
+                    android:textColor="#000"
                     android:textSize="20dp" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
-	<LinearLayout 
-            android:layout_width="match_parent"
+
+    <RelativeLayout
+        android:id="@+id/qxLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/qxtime"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/detail"
-            android:background="@drawable/qxbg"
-            >
-            
+            android:layout_centerVertical="true"
+            android:text="2015-06-26\n14时25分36秒"
+            android:textColor="#000"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/qxtime"
+            android:background="@drawable/qxjlbg9"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设备名称："
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/qxsbName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设备名称："
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="    巡视人："
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/qxxsrName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设备名称："
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="    经纬度："
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/qxjwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="北纬36,东经117"
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="缺陷内容："
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/qx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="北纬36,东经117"
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="缺陷照片："
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+
+                <com.example.uhfxintong.views.MyInnerGridView
+                    android:id="@+id/qxgrid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="4" 
+                    android:verticalSpacing="2dp"
+                    android:horizontalSpacing="2dp"
+                    >
+                </com.example.uhfxintong.views.MyInnerGridView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="        备注："
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/qxbz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="北纬36,东经117"
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+            </LinearLayout>
         </LinearLayout>
+    </RelativeLayout>
+
 </LinearLayout>

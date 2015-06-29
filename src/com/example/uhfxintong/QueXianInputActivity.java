@@ -175,8 +175,10 @@ public class QueXianInputActivity extends Activity {
 			File f=new File(Environment.getExternalStorageDirectory() 
 					+"/"+localTempImgDir + "/" + uhf.getUhfId() + "/"+localTempImgFileName); 
 			Log.i("a", "f path = " + f.getAbsolutePath());
-			photoPaths.add(f.getAbsolutePath());
-			adapter.notifyDataSetChanged();
+			if(f.exists()) {
+				photoPaths.add(f.getAbsolutePath());
+				adapter.notifyDataSetChanged();
+			}
 			break;
 		}
 	}
