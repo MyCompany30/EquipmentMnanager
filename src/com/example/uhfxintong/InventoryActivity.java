@@ -137,7 +137,7 @@ public class InventoryActivity extends Activity {
 					}
 					
 				} else {
-					//stop();
+					stop();
 					mTts.startSpeaking("数据库中无此设备信息，请录入", mTtsListener);
 //					edit_UII.setText(null);
 //					edit_UII.setText("数据库中无此设备信息，请录入");
@@ -707,7 +707,7 @@ public class InventoryActivity extends Activity {
 		edit_UII += "设备名称  "+uhfById.getUhfName()+"  巡视人员   " + uhfById.getOperator() + "  巡视时间   " + uhfById.getTime();
 		int code = mTts.startSpeaking(edit_UII, mTtsListener);
 		readedUhfs.add(uhfById);
-		//stop();
+		stop();
 		if (code != ErrorCode.SUCCESS) {
 			if (code == ErrorCode.ERROR_COMPONENT_NOT_INSTALLED) {
 				// 未安装则跳转到提示安装页面
