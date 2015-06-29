@@ -74,9 +74,9 @@ public class EntryActivity extends Activity {
 		LinearLayout layout = (LinearLayout)this.findViewById(R.id.write_main_layout);
 		if(getResources().getConfiguration().orientation==0){
 			//竖屏
-			layout.setBackgroundResource(R.drawable.frame_bg_v);
+			layout.setBackgroundResource(R.drawable.pandian_bg);
 		}else{
-			layout.setBackgroundResource(R.drawable.frame_bg);
+			layout.setBackgroundResource(R.drawable.pandian_bg);
 		}
 		tv = (TextView) findViewById(R.id.uii_tv);
 		uii = (EditText) findViewById(R.id.edit_uii);
