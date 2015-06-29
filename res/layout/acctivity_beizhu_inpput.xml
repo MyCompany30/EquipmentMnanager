@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@drawable/pandian_bg"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:background="#5aa1d7" >
+        android:background="#147e6e" >
 
         <include layout="@layout/btnclick_layout" />
 
@@ -41,6 +41,7 @@
 	            android:padding="5dp"
 	            android:textColor="#000"
 	            android:textSize="20dp"
+	            android:background="@drawable/qxinputbg"
 	            android:hint="请输入备注信息"
 	            />
 	    </LinearLayout>
