@@ -103,7 +103,7 @@ public class InventoryActivity extends Activity {
 	private TextView renyuanTV = null;
 	private TextView zhengchangTV = null;
 	private TextView quexianTV = null;
-	private TextView complateTV = null;
+	private ImageView complateTV = null;
 	private int zhengchangCount = 0;
 	private int quexianCount = 0;
 	private List<Uhf> readedUhfs = new ArrayList<Uhf>();
@@ -226,7 +226,7 @@ public class InventoryActivity extends Activity {
 		renyuanTV = (TextView)this.findViewById(R.id.pandian_panel_renyuan2);
 		zhengchangTV = (TextView)this.findViewById(R.id.pandian_panel_zhengchang2);
 		quexianTV = (TextView)this.findViewById(R.id.pandian_panel_quexian2);
-		complateTV = (TextView)this.findViewById(R.id.complateBtn);
+		complateTV = (ImageView)this.findViewById(R.id.complateBtn);
 		
 		riqiTV.setText(new SimpleDateFormat("yyyy年MM月dd日").format(new Date()));
 		renyuanTV.setText(operator);
@@ -239,9 +239,9 @@ public class InventoryActivity extends Activity {
 		LinearLayout layout = (LinearLayout)this.findViewById(R.id.read_main_layout);
 		if(getResources().getConfiguration().orientation==0){
 			//竖屏
-			layout.setBackgroundResource(R.drawable.frame_bg_v);
+			layout.setBackgroundResource(R.drawable.pandian_bg);
 		}else{
-			layout.setBackgroundResource(R.drawable.frame_bg);
+			layout.setBackgroundResource(R.drawable.pandian_bg);
 		}
 		SpeechUtility.createUtility(this, "appid=" + getString(R.string.app_id));
 
@@ -729,5 +729,11 @@ public class InventoryActivity extends Activity {
 		Uhf uhf = uhfArrayList.get(event.getPosition());
 		uhf.setNotes(event.getContent());
 		listAdapter.notifyDataSetChanged();
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		start();
 	}
 }
