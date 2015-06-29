@@ -24,7 +24,7 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
-            android:background="#5aa1d7" >
+            android:background="#147e6e" >
 
             <include layout="@layout/btnclick_layout" />
 
