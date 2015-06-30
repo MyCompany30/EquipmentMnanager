@@ -68,6 +68,7 @@ public class EntryActivity extends Activity {
 					uii.setText(uhf.getUhfId());
 					device.setText(uhf.getUhfName());
 					volt.setText(uhf.getVoltGrade());
+					factory.setText(uhf.getFactory());
 					line.setText(uhf.getLineSpace());
 					modify.setVisibility(View.VISIBLE);
 					save.setVisibility(View.GONE);
@@ -182,6 +183,7 @@ public class EntryActivity extends Activity {
 					if(uhf == null)
 						return;
 					uhf.setUhfName(device.getText().toString());
+					uhf.setFactory(factory.getText().toString());
 					uhf.setVoltGrade(volt.getText().toString());
 					uhf.setLineSpace(line.getText().toString());
 					UhfService service = new UhfService(EntryActivity.this);
@@ -309,7 +311,7 @@ public class EntryActivity extends Activity {
 	}
 
 	// ///////////////////////////////////////////////////////////
-
+/*
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (KeyEvent.KEYCODE_BACK == keyCode
@@ -319,7 +321,7 @@ public class EntryActivity extends Activity {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-
+*/
 	// /////////////////////////////////////////////////////////////
 
 	protected void startInventory() {
