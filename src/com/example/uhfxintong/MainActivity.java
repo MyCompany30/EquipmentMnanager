@@ -23,7 +23,7 @@ import android.widget.Toast;
  */
 public class MainActivity extends Activity {
 	public static final String Tag = "MainActivity";
-	private String operator = "刘福贵";
+	private String operator = "";
 	private TextView userTv = null;
 	private TextView userCodeTv = null;
 
