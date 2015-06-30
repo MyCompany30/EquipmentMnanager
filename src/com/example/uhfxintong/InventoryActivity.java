@@ -136,7 +136,7 @@ public class InventoryActivity extends Activity {
 						listAdapter.notifyDataSetChanged();
 					}
 					
-				} else {
+				} /*else {
 					stop();
 					mTts.startSpeaking("数据库中无此设备信息，请录入", mTtsListener);
 //					edit_UII.setText(null);
@@ -147,7 +147,7 @@ public class InventoryActivity extends Activity {
 					// startActivity(intent);
 					startActivityForResult(intent, 1);
 					isSpeaker = true;
-				}
+				}*/
 			} catch (RowsExceededException e) {
 				e.printStackTrace();
 			} catch (WriteException e) {
@@ -744,5 +744,11 @@ public class InventoryActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		start();
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		stop();
 	}
 }
