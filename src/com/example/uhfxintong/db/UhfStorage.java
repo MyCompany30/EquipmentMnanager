@@ -90,13 +90,13 @@ public class UhfStorage {
 	     * @param cv
 	     * @param id
 	     */
-	    public void update(ContentValues cv,String id){
+	    public int update(ContentValues cv,String id){
 	    	SQLiteDatabase db = helper.getWritableDatabase();
 	    	String where = "_id=?";
 			String[] args=new String[]{id};
-	    	db.update(TABLE_NAME, cv, where, args);
+	    	int i = db.update(TABLE_NAME, cv, where, args);
 	    	db.close();
-			
+			return i;
 	    }
 	    
 	    public String[] getColumns(){

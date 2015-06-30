@@ -59,9 +59,9 @@ public class UhfService {
 		return count;
 
 	}
-	public void update(Uhf uhf){
+	public int update(Uhf uhf){
 		ContentValues cv = fillContentValues(uhf);
-		storage.update(cv,uhf.getUhfId());
+		return storage.update(cv,uhf.getUhfId());
 	}
 	
 	private ContentValues fillContentValues(Uhf uhf) {

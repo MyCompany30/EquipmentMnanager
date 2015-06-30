@@ -3,6 +3,8 @@ package com.example.uhfxintong;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
@@ -41,7 +43,8 @@ public class EntryActivity extends Activity {
 	private static final String TAG = "UII写入数据库主程序";
 	private ImageView save, cancel, shutup,modify;
 	private EditText uii, device, factory, volt, line, operator, time;
-
+	private Timer mTimer;
+	private TimerTask mTask;
 	private TextView tv;
 	SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒SSS毫秒");
 
@@ -56,15 +59,66 @@ public class EntryActivity extends Activity {
 		public void run() {
 			accompaniment.start();
 			accompainimentsHandler.removeCallbacks(this);
-			uii_str = DataTransfer.xGetString(uii_change.getBytes()).substring(
-					0, 41);
+			uii_str = DataTransfer.xGetString(uii_change.getBytes()).substring(0, 41);
+			
+			try {
+				Uhf uhf = getUhfById(uii_str);
+				if (uhf != null) {
+					//uhfName=33, time=null, operator=null, voltGrade=22, lineSpace=11
+					uii.setText(uhf.getUhfId());
+					device.setText(uhf.getUhfName());
+					volt.setText(uhf.getVoltGrade());
+					line.setText(uhf.getLineSpace());
+					modify.setVisibility(View.VISIBLE);
+					save.setVisibility(View.GONE);
+					stop();
+					return;
+				}
+			} catch (RowsExceededException e) {
+				e.printStackTrace();
+			} catch (WriteException e) {
+				e.printStackTrace();
+			} catch (BiffException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			modify.setVisibility(View.GONE);
+			save.setVisibility(View.VISIBLE);
 			uii.setText(null);
 			uii.append(uii_str);
-			// ///////////////////////////
+			stop();
 		}
 	};
+	// 启动
+	private void start() {
+		if (mTimer == null) {
+			mTimer = new Timer();
+		}
+			mTask = new TimerTask() {
+				@Override
+				public void run() {
+					startInventory();
+				}
+			};
+		mTimer.schedule(mTask, 1000, 1000);
 
-	// /////////////////////////////////////////////
+	}
+
+	// Stop
+	private void stop() {
+
+		App.stop();
+		if (mTimer != null) {
+			mTimer.cancel();
+			mTimer = null;
+		}
+		if (mTask != null) {
+			mTask.cancel();
+			mTask = null;
+		}
+
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +160,7 @@ public class EntryActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				startInventory();
+				//startInventory();
 			}
 		});
 		shutup.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +173,6 @@ public class EntryActivity extends Activity {
 		});
 		//修改标签信息
 		modify.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				if(uii == null)
@@ -128,8 +181,17 @@ public class EntryActivity extends Activity {
 					Uhf uhf=getUhfById(uii.getText().toString());
 					if(uhf == null)
 						return;
+					uhf.setUhfName(device.getText().toString());
+					uhf.setVoltGrade(volt.getText().toString());
+					uhf.setLineSpace(line.getText().toString());
 					UhfService service = new UhfService(EntryActivity.this);
-					service.update(uhf);
+					if(service.update(uhf)>0){
+						Toast.makeText(EntryActivity.this, "数据修改成功", Toast.LENGTH_SHORT).show();
+						clear();
+						start();
+					} else {
+						Toast.makeText(EntryActivity.this, "数据修改失败", Toast.LENGTH_SHORT).show();
+					}
 				} catch (RowsExceededException e) {
 					e.printStackTrace();
 				} catch (WriteException e) {
@@ -139,7 +201,6 @@ public class EntryActivity extends Activity {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
 			}
 		});
 		// //////////////////////////////////////////
@@ -185,7 +246,7 @@ public class EntryActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				clear();
-
+				start();
 			}
 
 		});
@@ -206,6 +267,7 @@ public class EntryActivity extends Activity {
 		if (service.saveUhf(uhf) > 0) {
 			Toast.makeText(this, "数据保存成功", Toast.LENGTH_SHORT).show();
 			clear();
+			start();
 		} else {
 			Toast.makeText(this, "UII 号码已经存在数据不能保存", Toast.LENGTH_SHORT).show();
 
@@ -327,5 +389,17 @@ public class EntryActivity extends Activity {
 	}
 	public void backBtn(View v){
 		this.finish();
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		start();
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		stop();
 	}
 }

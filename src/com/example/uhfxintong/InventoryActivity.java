@@ -82,7 +82,7 @@ public class InventoryActivity extends Activity {
 	@SuppressWarnings("unused")
 	private int mPercentForPlaying = 0;
 	
-	private TextView scan;
+	private ImageView scan;
 	//private EditText edit_UII;
 	//private Button clear;
 	private com.senter.support.openapi.StUhf.UII uii_change;
@@ -232,7 +232,7 @@ public class InventoryActivity extends Activity {
 		renyuanTV.setText(operator);
 		zhengchangTV.setText("0");
 		quexianTV.setText("0");
-		scan = (TextView)this.findViewById(R.id.scan);
+		scan = (ImageView)this.findViewById(R.id.scan);
 		listView = (ListView)this.findViewById(R.id.listView);
 		listAdapter = new MyListAdapter();
 		listView.setAdapter(listAdapter);
@@ -254,10 +254,10 @@ public class InventoryActivity extends Activity {
 		//edit_UII = (EditText) findViewById(R.id.uii_data);
 /*		clear = (Button) findViewById(R.id.clear_uii);		*/
 		if (!state) {
-			scan.setText("开始扫描");
+			scan.setImageResource(R.drawable.scan_start);
 
 		} else {
-			scan.setText("停止扫描");
+			scan.setImageResource(R.drawable.scan_pause);
 		}
 
 		HandlerThread htHandlerThread = new HandlerThread("");
@@ -294,7 +294,7 @@ public class InventoryActivity extends Activity {
 			public void onClick(View v) {
 
 				if (!state) {
-					scan.setText("停止扫描");
+					scan.setImageResource(R.drawable.scan_pause);
 					state = true;
 					start();
 
@@ -305,7 +305,7 @@ public class InventoryActivity extends Activity {
 						// mTts.destroy();
 					}
 					state = false;
-					scan.setText("开始扫描");
+					scan.setImageResource(R.drawable.scan_start);
 					stop();
 
 				}
@@ -734,7 +734,11 @@ public class InventoryActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		start();
+		if(state){
+			scan.setImageResource(R.drawable.scan_pause);
+		}else{
+			scan.setImageResource(R.drawable.scan_start);
+		}
 	}
 	@Override
 	protected void onPause() {
