@@ -723,6 +723,15 @@ public class InventoryActivity extends Activity {
 		uhf.setDefect(event.getContent());
 		uhf.setPhotos(event.getPhotoPaths());
 		listAdapter.notifyDataSetChanged();
+		quexianCount = 0;
+		for(Uhf u : uhfArrayList) {
+			if(u.getDefect() != null && !"".equals(u.getDefect())) {
+				quexianCount++;
+			}
+		}
+		quexianTV.setText(quexianCount+"");
+		int qx = Integer.parseInt(quexianTV.getText().toString());
+		zhengchangTV.setText(uhfArrayList.size()-qx+"");
 	}
 	
 	public void onEvent(NoteListener event) {

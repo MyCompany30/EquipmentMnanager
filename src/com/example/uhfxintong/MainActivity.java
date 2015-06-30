@@ -23,18 +23,19 @@ import android.widget.Toast;
  */
 public class MainActivity extends Activity {
 	public static final String Tag = "MainActivity";
-	private String operator = "aaa";
-	private TextView userTv =null;
+	private String operator = "";
+	private TextView userTv = null;
 	private TextView userCodeTv = null;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		if (App.getRfid() == null) {
-			Toast.makeText(this, R.string.MakeSurePDAexitRfid,
-					Toast.LENGTH_LONG).show();
-			finish();
+//			Toast.makeText(this, R.string.MakeSurePDAexitRfid,
+//					Toast.LENGTH_LONG).show();
+//			finish();
+			new ViewsD2();
 		} else {
 			switch (App.getRfid().getInterrogatorModel()) {
 
@@ -146,11 +147,11 @@ public class MainActivity extends Activity {
 
 		public ViewsD2() {// idMain2ActivityD_glApps_6b_inInventory
 
-			setContentView(R.layout.main_two);
+			setContentView(R.layout.main_three);
 			// LinearLayout ll = (LinearLayout)
 			// findViewById(R.id.idMain2ActivityD_glApps_inInventory);
-			userTv = (TextView)findViewById(R.id.operator);
-			userCodeTv = (TextView)findViewById(R.id.operator_code);
+			userTv = (TextView) findViewById(R.id.operator);
+			userCodeTv = (TextView) findViewById(R.id.operator_code);
 			RelativeLayout layout = (RelativeLayout) MainActivity.this
 					.findViewById(R.id.main_layout);
 			if (getResources().getConfiguration().orientation == 0) {
@@ -164,7 +165,13 @@ public class MainActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					// on6C2Write();
-					myStartActivity(EntryActivity.class);
+					if (operator.equals("")) {
+						Intent intent = new Intent(MainActivity.this,
+								ErWeiScanCaptureActivity.class);
+						startActivityForResult(intent, 99);
+					} else {
+						myStartActivity(EntryActivity.class);
+					}
 				}
 			});
 
@@ -174,18 +181,22 @@ public class MainActivity extends Activity {
 				public void onClick(View v) {
 					// on6C1Read();
 					if (operator.equals("")) {
-						Toast.makeText(getApplicationContext(), "未登录",
-								Toast.LENGTH_SHORT).show();
-						return;
+						// Toast.makeText(getApplicationContext(), "未登录",
+						// Toast.LENGTH_SHORT).show();
+						Intent intent = new Intent(MainActivity.this,
+								ErWeiScanCaptureActivity.class);
+						startActivityForResult(intent, 100);
+					} else {
+						Intent intent = new Intent(getApplicationContext(),
+								InventoryActivity.class);
+						intent.putExtra("operator", operator);
+						startActivity(intent);
 					}
-					Intent intent = new Intent(getApplicationContext(),
-							InventoryActivity.class);
-					intent.putExtra("operator", operator);
-					startActivity(intent);
+
 				}
 			});
 
-			ImageView person = (ImageView) findViewById(R.id.person);
+//			ImageView person = (ImageView) findViewById(R.id.person);
 			// person.setOnClickListener(new OnClickListener() {
 			// @Override
 			// public void onClick(View v) {
@@ -219,24 +230,29 @@ public class MainActivity extends Activity {
 			// dialog.show();
 			// }
 			// });
-			person.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View arg0) {
-					Intent intent = new Intent(MainActivity.this,
-							ErWeiScanCaptureActivity.class);
-					startActivityForResult(intent, 100);
-				}
-			});
+//			person.setOnClickListener(new OnClickListener() {
+//
+//				@Override
+//				public void onClick(View arg0) {
+//						Intent intent = new Intent(MainActivity.this,
+//								ErWeiScanCaptureActivity.class);
+//						startActivityForResult(intent, 100);
+//				}
+//			});
 			// 历史记录
 			ImageView history = (ImageView) MainActivity.this
 					.findViewById(R.id.stocktaking);
 			history.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
-//					myStartActivity(HistoryActivity.class);
-					myStartActivity(HistoryActivityNew.class);
+
+					if (operator.equals("")) {
+						Intent intent = new Intent(MainActivity.this,
+								ErWeiScanCaptureActivity.class);
+						startActivityForResult(intent, 98);
+					} else {
+						myStartActivity(HistoryActivityNew.class);
+					};
 				}
 			});
 
@@ -448,15 +464,33 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		switch (resultCode) {
-		case 100:
-			Bundle bundle = data.getExtras();
-			String code = bundle.getString("result");	
-			operator = "刘福贵";
-			userTv.setText(operator);
-			userCodeTv.setText(code);
-			//Toast.makeText(MainActivity.this, "扫描内容 = " + code, 0).show();
-			break;
+		if(data != null) {
+			switch (requestCode) {
+			case 100:
+				Bundle bundle = data.getExtras();
+				String code = bundle.getString("result");
+				operator = "刘福贵";
+				// userTv.setText(operator);
+				// userCodeTv.setText(code);
+				Intent intent = new Intent(getApplicationContext(),
+						InventoryActivity.class);
+				intent.putExtra("operator", operator);
+				startActivity(intent);
+				// Toast.makeText(MainActivity.this, "扫描内容 = " + code, 0).show();
+				break;
+			case 99:
+				bundle = data.getExtras();
+				code = bundle.getString("result");
+				operator = "刘福贵";
+				myStartActivity(EntryActivity.class);
+				break;
+			case 98:
+				bundle = data.getExtras();
+				code = bundle.getString("result");
+				operator = "刘福贵";
+				myStartActivity(HistoryActivityNew.class);
+				break;
+			}
 		}
 	}
 }
