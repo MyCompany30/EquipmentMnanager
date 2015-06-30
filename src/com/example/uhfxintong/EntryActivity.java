@@ -299,12 +299,12 @@ public class EntryActivity extends Activity {
 	public void clear() {
 
 		System.out.println("执行数据清除");
-		uii.setText(null);
-		device.setText(null);
-		factory.setText(null);
+		uii.setText("");
+		device.setText("");
+		factory.setText("");
 		// operator.setText(null);
-		volt.setText(null);
-		line.setText(null);
+		volt.setText("");
+		line.setText("");
 		Toast.makeText(this, "清空数据成功", Toast.LENGTH_SHORT).show();
 	}
 
