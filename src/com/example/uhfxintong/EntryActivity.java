@@ -60,7 +60,7 @@ public class EntryActivity extends Activity {
 			accompaniment.start();
 			accompainimentsHandler.removeCallbacks(this);
 			uii_str = DataTransfer.xGetString(uii_change.getBytes()).substring(0, 41);
-			
+			clear();
 			try {
 				Uhf uhf = getUhfById(uii_str);
 				if (uhf != null) {
