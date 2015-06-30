@@ -64,7 +64,6 @@ public class EntryActivity extends Activity {
 			try {
 				Uhf uhf = getUhfById(uii_str);
 				if (uhf != null) {
-					//uhfName=33, time=null, operator=null, voltGrade=22, lineSpace=11
 					uii.setText(uhf.getUhfId());
 					device.setText(uhf.getUhfName());
 					volt.setText(uhf.getVoltGrade());
