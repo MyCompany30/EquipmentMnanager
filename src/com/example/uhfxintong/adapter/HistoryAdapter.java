@@ -70,6 +70,8 @@ public class HistoryAdapter extends BaseAdapter {
 			vh.yxLayout = (RelativeLayout) convertView.findViewById(R.id.yxLayout);
 			vh.yxTime = (TextView) convertView.findViewById(R.id.yxtime);
 			vh.qxTime = (TextView) convertView.findViewById(R.id.qxtime);
+			vh.yxDate = (TextView) convertView.findViewById(R.id.yxDate);
+			vh.qxDate = (TextView) convertView.findViewById(R.id.qxDate);
 			vh.yxSbName = (TextView) convertView.findViewById(R.id.yxsbName);
 			vh.qxSbName = (TextView) convertView.findViewById(R.id.qxsbName);
 			vh.yxXsrName = (TextView) convertView.findViewById(R.id.yxxsrName);
@@ -121,7 +123,11 @@ public class HistoryAdapter extends BaseAdapter {
 					}
 				});
 			}
-			
+			String dateTime = u.getTime();
+			String date = dateTime.substring(0, dateTime.lastIndexOf(" "));
+			String time = dateTime.substring(dateTime.lastIndexOf(" ") + 1, dateTime.length());
+			vh.qxDate.setText(date);
+			vh.qxTime.setText(time);
 			
 		}else {
 			vh.qxLayout.setVisibility(View.GONE);
@@ -133,13 +139,18 @@ public class HistoryAdapter extends BaseAdapter {
 			}else {
 				vh.yxBz.setText(u.getNotes());
 			}
+			String dateTime = u.getTime();
+			String date = dateTime.substring(0, dateTime.lastIndexOf(" "));
+			String time = dateTime.substring(dateTime.lastIndexOf(" ") + 1, dateTime.length());
+			vh.yxDate.setText(date);
+			vh.yxTime.setText(time);
 		}
 		return convertView;
 	}
 	
 	static class ViewHolder {
 		RelativeLayout qxLayout, yxLayout;
-		TextView yxTime, qxTime,yxSbName, qxSbName,yxXsrName, qxXsrName,yxJwd,qxJwd,yxBz, qxBz, qx;
+		TextView yxTime, qxTime,yxSbName, qxSbName,yxXsrName, qxXsrName,yxJwd,qxJwd,yxBz, qxBz, qx, yxDate, qxDate;
 		MyInnerGridView qxGridView;
 	}
 	
