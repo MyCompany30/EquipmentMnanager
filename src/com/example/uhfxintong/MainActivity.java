@@ -147,7 +147,7 @@ public class MainActivity extends Activity {
 
 		public ViewsD2() {// idMain2ActivityD_glApps_6b_inInventory
 
-			setContentView(R.layout.main_two);
+			setContentView(R.layout.main_three);
 			// LinearLayout ll = (LinearLayout)
 			// findViewById(R.id.idMain2ActivityD_glApps_inInventory);
 			userTv = (TextView) findViewById(R.id.operator);
@@ -196,7 +196,7 @@ public class MainActivity extends Activity {
 				}
 			});
 
-			ImageView person = (ImageView) findViewById(R.id.person);
+//			ImageView person = (ImageView) findViewById(R.id.person);
 			// person.setOnClickListener(new OnClickListener() {
 			// @Override
 			// public void onClick(View v) {
@@ -230,15 +230,15 @@ public class MainActivity extends Activity {
 			// dialog.show();
 			// }
 			// });
-			person.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View arg0) {
-						Intent intent = new Intent(MainActivity.this,
-								ErWeiScanCaptureActivity.class);
-						startActivityForResult(intent, 100);
-				}
-			});
+//			person.setOnClickListener(new OnClickListener() {
+//
+//				@Override
+//				public void onClick(View arg0) {
+//						Intent intent = new Intent(MainActivity.this,
+//								ErWeiScanCaptureActivity.class);
+//						startActivityForResult(intent, 100);
+//				}
+//			});
 			// 历史记录
 			ImageView history = (ImageView) MainActivity.this
 					.findViewById(R.id.stocktaking);
@@ -464,31 +464,33 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		switch (requestCode) {
-		case 100:
-			Bundle bundle = data.getExtras();
-			String code = bundle.getString("result");
-			operator = "刘福贵";
-			// userTv.setText(operator);
-			// userCodeTv.setText(code);
-			Intent intent = new Intent(getApplicationContext(),
-					InventoryActivity.class);
-			intent.putExtra("operator", operator);
-			startActivity(intent);
-			// Toast.makeText(MainActivity.this, "扫描内容 = " + code, 0).show();
-			break;
-		case 99:
-			bundle = data.getExtras();
-			code = bundle.getString("result");
-			operator = "刘福贵";
-			myStartActivity(EntryActivity.class);
-			break;
-		case 98:
-			bundle = data.getExtras();
-			code = bundle.getString("result");
-			operator = "刘福贵";
-			myStartActivity(HistoryActivityNew.class);
-			break;
+		if(data != null) {
+			switch (requestCode) {
+			case 100:
+				Bundle bundle = data.getExtras();
+				String code = bundle.getString("result");
+				operator = "刘福贵";
+				// userTv.setText(operator);
+				// userCodeTv.setText(code);
+				Intent intent = new Intent(getApplicationContext(),
+						InventoryActivity.class);
+				intent.putExtra("operator", operator);
+				startActivity(intent);
+				// Toast.makeText(MainActivity.this, "扫描内容 = " + code, 0).show();
+				break;
+			case 99:
+				bundle = data.getExtras();
+				code = bundle.getString("result");
+				operator = "刘福贵";
+				myStartActivity(EntryActivity.class);
+				break;
+			case 98:
+				bundle = data.getExtras();
+				code = bundle.getString("result");
+				operator = "刘福贵";
+				myStartActivity(HistoryActivityNew.class);
+				break;
+			}
 		}
 	}
 }
